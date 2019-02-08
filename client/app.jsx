@@ -1,5 +1,6 @@
 import React from 'react';
 import Promo from './promo';
+import Navigation from './navigation';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends React.Component {
     return (
       <div className='navbar-header'>
         <Promo />
+        <Navigation />
 
       <img src='https://s3.amazonaws.com/navbarpictures/tshirts/40079881_023_b.jpeg'></img>
         <h2>what's up</h2>
