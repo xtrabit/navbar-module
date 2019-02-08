@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch",
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "db-seed": "mysql -u root -p < data/schema.sql"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
