@@ -3,9 +3,16 @@ const config = require('./config.js');
 
 const db = mysql.createConnection(config);
 
-// db.connect();
-const getItem = function(item, callback) {
-  db.query('SELECT * FROM inventory;', function(err, res) {
+db.connect((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('mySQL CONNECTED!');
+  }
+});
+
+const getItem = function(itemName, callback) {
+  db.query(('SELECT * FROM inventory WHERE item_name = "' + itemName + '"'), function(err, res) {
     if (err) {
       console.log('ERROR inventory', err);
       return callback(err);
@@ -16,8 +23,6 @@ const getItem = function(item, callback) {
 };
 
 module.exports = {
-  getAllLines,
-  getStops,
-  updateStations
+  getItem
 };
 
