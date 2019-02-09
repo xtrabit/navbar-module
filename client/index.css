@@ -1,0 +1,22 @@
+.navbar-header-promo {
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2859a;
+}
+
+.navbar-navigation-main {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  list-style-type: none;
+  padding: 20px 10px;
+}
+
+.navbar-promo-link {
+  vertical-align: middle;
+}
+
+.navbar-promo-link-container {
+  vertical-align: baseline;
+}

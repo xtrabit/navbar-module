@@ -15,10 +15,6 @@ class App extends React.Component {
       <div className='navbar-header'>
         <Promo />
         <Navigation />
-
-      <img src='https://s3.amazonaws.com/navbarpictures/tshirts/40079881_023_b.jpeg'></img>
-        <h2>what's up</h2>
-
       </div>
     );
   }

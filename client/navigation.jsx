@@ -1,6 +1,7 @@
 import React from 'react';
 import NavMain from './navmain';
 import NavLower from './navlower';
+import NavSearch from './navsearch';
 
 class Navigation extends React.Component {
   render() {
@@ -15,7 +16,13 @@ class Navigation extends React.Component {
             <NavLower />
           </nav>
         </div>
+        <NavSearch />
+        <div className='navbar-navigation-signin'>
+          <span>Sign in</span>
+        </div>
+        <div className='navbar-navigation-cart'>
 
+        </div>
       </div>
     );
   }
