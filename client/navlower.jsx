@@ -8,11 +8,12 @@ class NavLower extends React.Component {
         <li>Brands</li>
         <li>Graphic Tees</li>
         <li>Tops</li>
-        <li>Coats+Jackets</li>
+        <li>Coats + Jackets</li>
         <li>Bottoms</li>
-        <li>Soes</li>
+        <li>Suiting</li>
+        <li>Shoes</li>
         <li>Accessories</li>
-        <li>Socks+Underwear</li>
+        <li>Socks + Underwear</li>
         <li>Vintage</li>
         <li>Grooming</li>
         <li>Sale</li>
