@@ -3,7 +3,6 @@ import React from 'react';
 class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.womens = [
       'New', 'Dresses + Rompers', 'Tops', 'Coats + Jackets', 'Bottoms', 'Intimates',
       'Swim', 'Vintage', 'Beauty', 'Accessories', 'Shoes', 'Brands', 'Sale'

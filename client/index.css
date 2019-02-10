@@ -85,6 +85,14 @@ body {
   border-color: black;*/
 }
 
+.navbar-navigation-upper li:not(.navbar-selected):hover {
+  color: #767676;
+}
+
+.navbar-selected {
+  font-weight: bold;
+}
+
 .navbar-navigation-lower {
   position: absolute;
   display: flex;
@@ -212,6 +220,11 @@ body {
   padding: 27px 10px;
 }
 
+.navbar-upper-dropdown-menu li:hover {
+  color: #767676
+}
+
 .navbar-sale {
   color: #e00000;
 }
+
