@@ -18,7 +18,7 @@ class NavMain extends React.Component {
 
   showMenu(event) {
     event.preventDefault();
-    if (this.state.nextMenuName === event.target.innerHTML) {
+    if (this.state.nextMenuName === event.target.innerHTML && this.state.hideMenu !== true) {
       this.setState({showMenu: true});
       this.setState({menuName: event.target.innerHTML})
     }
@@ -26,7 +26,7 @@ class NavMain extends React.Component {
 
   hideMenu(event) {
     event.preventDefault();
-    if (event.target.innerHTML === this.state.menuName && this.state.hideMenu === true) {
+    if (this.state.hideMenu === true) {
       this.setState({showMenu: false});
     }
   }
@@ -57,7 +57,7 @@ class NavMain extends React.Component {
       </ul>
       <div className='navbar-upper-dropdown-container'>
         <Menu name={this.state.menuName} show={this.state.showMenu}
-          cancel={this.state.cancelHide} hide={this.hideMenu}/>
+          cancel={this.state.cancelHide} hide={this.delayHide}/>
       </div>
       </div>
     );
