@@ -14,6 +14,7 @@ class NavMain extends React.Component {
     this.hideMenu = this.hideMenu.bind(this);
     this.delayHide = this.delayHide.bind(this);
     this.delayShow = this.delayShow.bind(this);
+    this.clearHideMenu = this.clearHideMenu.bind(this);
   }
 
   showMenu(event) {
@@ -44,6 +45,10 @@ class NavMain extends React.Component {
     setTimeout(this.showMenu.bind(this, event), 400);
   }
 
+  clearHideMenu() {
+    this.setState({hideMenu: false});
+  }
+
   render() {
     return (
       <div>
@@ -57,7 +62,7 @@ class NavMain extends React.Component {
       </ul>
       <div className='navbar-upper-dropdown-container'>
         <Menu name={this.state.menuName} show={this.state.showMenu}
-          cancel={this.state.cancelHide} hide={this.delayHide}/>
+          cancelHide={this.clearHideMenu} hide={this.delayHide}/>
       </div>
       </div>
     );

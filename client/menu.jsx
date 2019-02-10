@@ -35,30 +35,25 @@ class Menu extends React.Component {
       console.log('MENU NAME',name);
       if (name) {
         let list = this[name].map((item) => {
-              return (
-                item === 'Sale'
-                ? <li key={item} className='navbar-sale'>{item}</li>
-                : <li key={item}>{item}</li>
-              );
-            });
-            return (
-              <ul className='navbar-upper-dropdown-menu'>
-                {list}
-              </ul>
-            );
+          return (
+            item === 'Sale'
+            ? <li key={item} className='navbar-sale'>{item}</li>
+            : <li key={item}>{item}</li>
+          );
+        });
+        return (
+          <ul className='navbar-upper-dropdown-menu'>
+            {list}
+          </ul>
+        );
       }
     }
-  }
-
-  handleMouseEnter() {
-    console.log('CANCEL handler PROPS',this.props.cancel)
-    clearTimeout(this.props.cancel);
   }
 
   render() {
     return (
       <div className='navbar-upper-dropdown'
-        onMouseEnter={this.handleMouseEnter}
+        onMouseEnter={this.props.cancelHide}
         onMouseLeave={this.props.hide}>
         {this.showList(this.props.name)}
       </div>
