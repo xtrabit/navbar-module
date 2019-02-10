@@ -32,19 +32,21 @@ class Menu extends React.Component {
   showList(category) {
     if (this.props.show) {
       let name =category.toLowerCase().split('\'').join('');
-      console.log(name);
-      let list = this[name].map((item) => {
-        return (
-          item === 'Sale'
-          ? <li key={item} className='navbar-sale'>{item}</li>
-          : <li key={item}>{item}</li>
-        );
-      });
-      return (
-        <ul className='navbar-upper-dropdown-menu'>
-          {list}
-        </ul>
-      );
+      console.log('MENU NAME',name);
+      if (name) {
+        let list = this[name].map((item) => {
+              return (
+                item === 'Sale'
+                ? <li key={item} className='navbar-sale'>{item}</li>
+                : <li key={item}>{item}</li>
+              );
+            });
+            return (
+              <ul className='navbar-upper-dropdown-menu'>
+                {list}
+              </ul>
+            );
+      }
     }
   }
 

@@ -6,45 +6,54 @@ class NavMain extends React.Component {
     super(props);
     this.state = {
       showMenu: false,
+      hideMenu: true,
       menuName: '',
-      cancelHide: ''
+      nextMenuName: ''
     };
     this.showMenu = this.showMenu.bind(this);
     this.hideMenu = this.hideMenu.bind(this);
-    this.cancel = 0;
+    this.delayHide = this.delayHide.bind(this);
+    this.delayShow = this.delayShow.bind(this);
   }
 
   showMenu(event) {
-    console.log('enter show++++++++++++++++++++++++++++++++++++++++')
     event.preventDefault();
-    console.log('SHOW MENU SHOULD CLEAR state',this.state.cancelHide)
-    console.log('SHOW MENU SHOULD CLEAR cancel',this.cancel)
-    clearTimeout(this.cancel);
-    this.setState({showMenu: true});
-    this.setState({menuName: event.target.innerHTML})
+    if (this.state.nextMenuName === event.target.innerHTML) {
+      this.setState({showMenu: true});
+      this.setState({menuName: event.target.innerHTML})
+    }
   }
 
   hideMenu(event) {
-    console.log('enter hide----------------------------------------')
     event.preventDefault();
-    this.cancel = setTimeout(() => {
-          console.log('TRIGGERED')
-          this.setState({showMenu: false});
-        }, 2000);
-    this.setState({cancelHide: this.cancel});
-    console.log('leaving hide, cacel = ', this.cancel)
+    if (event.target.innerHTML === this.state.menuName && this.state.hideMenu === true) {
+      this.setState({showMenu: false});
+    }
+  }
+
+  delayHide(event) {
+    event.persist();
+    this.setState({hideMenu: true});
+    setTimeout(this.hideMenu.bind(this, event), 400);
+  }
+
+  delayShow(event) {
+    event.persist();
+    this.setState({hideMenu: false});
+    this.setState({nextMenuName: event.target.innerHTML});
+    setTimeout(this.showMenu.bind(this, event), 400);
   }
 
   render() {
     return (
       <div>
       <ul className='navbar-navigation-upper'>
-        <li onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>Women's</li>
-        <li onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>Men's</li>
-        <li onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>Home</li>
-        <li onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>Lifestyle</li>
-        <li onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>Beauty</li>
-        <li onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu} className='navbar-sale'>Sale</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Women's</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Men's</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Home</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Lifestyle</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Beauty</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-sale'>Sale</li>
       </ul>
       <div className='navbar-upper-dropdown-container'>
         <Menu name={this.state.menuName} show={this.state.showMenu}
