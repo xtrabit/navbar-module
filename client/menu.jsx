@@ -31,7 +31,6 @@ class Menu extends React.Component {
   showList(category) {
     if (this.props.show) {
       let name =category.toLowerCase().split('\'').join('');
-      console.log('MENU NAME',name);
       if (name) {
         let list = this[name].map((item) => {
           return (
