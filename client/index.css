@@ -121,18 +121,6 @@ body {
   opacity: .94;
 }
 
-.navbar-navigation-search {
-  min-width: 200px;
-}
-
-.navbar-search-input {
-  width: 100%;
-}
-
-.navbar-search-suggestions {
-  display: none;
-}
-
 .navbar-navigation-logo {
 }
 
@@ -268,4 +256,141 @@ body {
 
 li:hover {
   cursor: pointer;
+}
+
+.navbar-navigation-search {
+  /*min-width: 200px;*/
+}
+
+.navbar-search-input {
+  width: 100%;
+}
+
+.navbar-search-suggestions-container {
+  position: relative;
+}
+
+.navbar-search-suggestions {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  right: 0;
+  /*height: 354px;*/
+  width: 700px;
+  border: solid #ddd 1px;
+  background-color: #fff
+}
+
+.navbar-popular-item-image {
+  height: 217px;
+}
+
+.navbar-popular-item-image:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.navbar-search-popular {
+  box-sizing: border-box;
+  padding: 25px 5px 30px 20px;
+  /*height: 353px;*/
+  width: 500px;
+}
+
+.navbar-popular-header {
+  font: .55rem helvetica, arial, sans-serif;
+  letter-spacing: .03rem;
+  margin: 0 0 10px 10px;
+  padding: 0 0 5px 0;
+  color: #767676;
+  border-bottom: solid #aaa 1px;
+}
+
+.navbar-popular-container {
+
+  display: flex;
+  flex-direction: row;
+
+}
+
+.navbar-popular-item-description {
+  padding-right: 10px;
+}
+
+.navbar-popular-item-header {
+  font: .68rem helvetica, arial, sans-serif;
+  letter-spacing: .03rem;
+  color: #767676;
+}
+
+.navbar-popular-item-header:hover {
+  cursor: pointer;
+}
+
+.navbar-popular-item {
+  width: 145px;
+  padding: 0 0 0 10px;
+}
+
+.navbar-search-trending {
+  box-sizing: border-box;
+  padding: 25px 30px 25px 35px;
+  width: 100%;
+}
+
+.navbar-trending-header {
+  font: .55rem helvetica, arial, sans-serif;
+  letter-spacing: .03rem;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  color: #767676;
+  border-bottom: solid #aaa 1px;
+}
+
+.navbar-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+
+.navbar-trending-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-trending-item {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+}
+
+.navbar-trending-item p {
+  font: .6rem helvetica, arial, sans-serif;
+  letter-spacing: .03rem;
+  color: #767676;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-trending-item p:before {
+  display: inline-block;
+  content: '';
+  margin-right: 5px;
+  width: 8px;
+  height: 8px;
+  background: url('https://www.urbanoutfitters.com/static/2.23.0/images/global/icons/icon-search.svg');
+}
+
+.navbar-suggestions-item p {
+  font: .68rem helvetica, arial, sans-serif;
+  letter-spacing: .03rem;
+  color: #222;
+  margin: 0;
+  padding: 0 0 7px 0;
 }
