@@ -81,9 +81,6 @@ body {
 .navbar-navigation-upper li {
   box-sizing: border-box;
   padding: 16px 10px;
-/*  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-color: black;*/
 }
 
 .navbar-navigation-upper li:not(.navbar-selected):hover {
@@ -117,7 +114,6 @@ body {
   display: flex;
   justify-content: center;
   top: 47px;
-  /*left: -30px;*/
   right: 0;
   width: calc(100% + 30px);
   border-bottom: none;
@@ -214,7 +210,6 @@ body {
   color: #222;
   background-color: #fff;
   z-index: 10;
-  /*transition: all 1s ease-out;*/
 }
 
 .navbar-upper-dropdown-menu li {
@@ -222,7 +217,7 @@ body {
 }
 
 .navbar-upper-dropdown-menu li:hover {
-  color: #767676
+  color: #767676;
 }
 
 .navbar-sale {
@@ -238,7 +233,6 @@ body {
   position: absolute;
   top: 0;
   left: -10px;
-
   margin: 0;
   background-color: #ffffffc0;
   z-index: 5;
@@ -247,14 +241,12 @@ body {
 .navbar-lower-dropdown-menu {
   display: flex;
   flex-direction: column;
-  /*height: 100%;*/
   list-style-type: none;
   padding: 0px;
   margin: 0;
   font: .68rem helvetica, arial, sans-serif;
   letter-spacing: .03rem;
   color: #222;
-  /*justify-content: center;*/
   padding: 0 20px 10px 20px;
 
 }
@@ -272,4 +264,8 @@ body {
 .navbar-lower-dropdown .navbar-lower-dropdown-menu li:hover {
   color: inherit;
   text-decoration: underline;
+}
+
+li:hover {
+  cursor: pointer;
 }
