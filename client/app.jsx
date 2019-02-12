@@ -6,9 +6,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lock: false
+      lock: false,
+      ignore: false,
+      scroll: 0
     }
     this.trackScrolling = this.trackScrolling.bind(this);
+    this.ignorePosition = this.ignorePosition.bind(this);
+    this.restorePosition = this.restorePosition.bind(this);
   }
 
   componentDidMount() {
@@ -20,11 +24,15 @@ class App extends React.Component {
   }
 
   trackScrolling () {
+    console.log('window.pageYOffset', window.pageYOffset)
     const wrappedElement = document.body;
-    if (this.isBottom(wrappedElement) && this.state.lock === false) {
-      setTimeout(()=>{this.isBottom(wrappedElement) ? this.setState({lock: true}) : null}, 200);
-    } else if (!this.isBottom(wrappedElement) && this.state.lock === true) {
-      this.setState({lock: false});
+    console.log('SCROLL NOW ', wrappedElement.getBoundingClientRect().top)
+    if (!this.state.ignore) {
+      if (this.isBottom(wrappedElement) && this.state.lock === false) {
+        setTimeout(()=>{this.isBottom(wrappedElement) ? this.setState({lock: true}) : null}, 200);
+      } else if (!this.isBottom(wrappedElement) && this.state.lock === true) {
+        this.setState({lock: false});
+      }
     }
   };
 
@@ -36,14 +44,27 @@ class App extends React.Component {
   }
 
   isBottom(el) {
-  return el.getBoundingClientRect().top <= -52;
-}
+    return el.getBoundingClientRect().top <= -52;
+  }
+
+  ignorePosition() {
+    this.setState({ignore: true});
+    this.setState({scroll: window.pageYOffset})
+  }
+
+  restorePosition() {
+    this.setState({ignore: false});
+    window.scroll(0, this.state.scroll);
+  }
+
+  saveScroll() {
+  }
 
   render() {
     return (
       <div className={'navbar-header' + this.lockPosition()}>
         <Promo />
-        <Navigation />
+        <Navigation ignore={this.ignorePosition} restore={this.restorePosition}/>
       </div>
     );
   }

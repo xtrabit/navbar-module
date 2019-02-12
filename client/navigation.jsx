@@ -3,8 +3,30 @@ import NavMain from './navmain';
 import NavLower from './navlower';
 import NavSearch from './navsearch';
 import Cart from './cart';
+import SignIn from './signin';
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
+
+  showSignin() {
+    this.props.ignore();
+    this.setState({show: true});
+    // document.body.style.setProperty('position', 'fixed');
+    document.body.style.setProperty('overflow', 'hidden');
+  }
+
+  hideSignin() {
+    this.setState({show: false});
+    this.props.restore();
+    // document.body.style.setProperty('position', 'static');
+    document.body.style.setProperty('overflow', 'visible');
+  }
+
   render() {
     return (
       <div className='navbar-header-navigation'>
@@ -21,7 +43,8 @@ class Navigation extends React.Component {
         </div>
         <NavSearch />
         <div className='navbar-navigation-signin'>
-          <a className='navbar-navigation-signin-link' href='#'>Sign in</a>
+          <a className='navbar-navigation-signin-link' href='#' onClick={()=>this.showSignin()}>Sign in</a>
+          <SignIn show={this.state.show} hide={()=>this.hideSignin()}/>
         </div>
         <Cart />
       </div>
