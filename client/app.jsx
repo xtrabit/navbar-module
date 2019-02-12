@@ -24,13 +24,10 @@ class App extends React.Component {
   }
 
   trackScrolling () {
-    console.log('window.pageYOffset', window.pageYOffset)
-    const wrappedElement = document.body;
-    console.log('SCROLL NOW ', wrappedElement.getBoundingClientRect().top)
     if (!this.state.ignore) {
-      if (this.isBottom(wrappedElement) && this.state.lock === false) {
-        setTimeout(()=>{this.isBottom(wrappedElement) ? this.setState({lock: true}) : null}, 200);
-      } else if (!this.isBottom(wrappedElement) && this.state.lock === true) {
+      if (this.isBottom() && this.state.lock === false) {
+        setTimeout(()=>{this.isBottom() ? this.setState({lock: true}) : null}, 200);
+      } else if (!this.isBottom() && this.state.lock === true) {
         this.setState({lock: false});
       }
     }
@@ -43,8 +40,8 @@ class App extends React.Component {
     return '';
   }
 
-  isBottom(el) {
-    return el.getBoundingClientRect().top <= -52;
+  isBottom() {
+    return window.pageYOffset >= 52;
   }
 
   ignorePosition() {
@@ -55,9 +52,6 @@ class App extends React.Component {
   restorePosition() {
     this.setState({ignore: false});
     window.scroll(0, this.state.scroll);
-  }
-
-  saveScroll() {
   }
 
   render() {

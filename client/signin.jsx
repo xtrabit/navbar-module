@@ -14,11 +14,11 @@ class SignIn extends React.Component {
           <form className='navbar-signin-form'>
             <div className='navbar-signin-emai'>
               <label>Email *</label><br/>
-              <input id="email" type="email" name="email" value='copoka@comcast.net'></input>
+              <input id="email" type="email" name="email" spellCheck="false" value='some@email.com'></input>
             </div>
             <div className='navbar-signin-password'>
               <label>Password *</label><br/>
-              <input id="password" type="password" name="password" value=''></input>
+              <input id="password" type="password" name="password" spellCheck="false" value='password'></input>
             </div>
             <div className='navbar-signin-forgot-link-wrapper'>
               <a className='navbar-signin-forgot-link' href='#'>Forgot Your Password?</a>

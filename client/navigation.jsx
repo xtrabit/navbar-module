@@ -16,14 +16,12 @@ class Navigation extends React.Component {
   showSignin() {
     this.props.ignore();
     this.setState({show: true});
-    // document.body.style.setProperty('position', 'fixed');
     document.body.style.setProperty('overflow', 'hidden');
   }
 
   hideSignin() {
     this.setState({show: false});
     this.props.restore();
-    // document.body.style.setProperty('position', 'static');
     document.body.style.setProperty('overflow', 'visible');
   }
 
