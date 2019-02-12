@@ -54,7 +54,7 @@ class NavMain extends React.Component {
       <div>
       <ul className='navbar-navigation-upper'>
         <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Women's</li>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Men's</li>
+        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-selected'>Men's</li>
         <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Home</li>
         <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Lifestyle</li>
         <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Beauty</li>

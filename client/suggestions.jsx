@@ -3,16 +3,20 @@ import Trending from './trending';
 import Popular from './popular';
 
 class Suggestions extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return (
-      <div className='navbar-search-suggestions'>
-        <ul className='navbar-suggestions-list'>
-          <li className='navbar-suggestions-item'>...</li>
-        </ul>
-        <Trending />
-        <Popular />
-      </div>
-    );
+    if (this.props.show) {
+      return (
+        <div className='navbar-search-suggestions'>
+          <Popular />
+          <Trending />
+        </div>
+      );
+    }
+    return null;
   }
 }
 

@@ -3,7 +3,6 @@ import React from 'react';
 class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.womens = [
       'New', 'Dresses + Rompers', 'Tops', 'Coats + Jackets', 'Bottoms', 'Intimates',
       'Swim', 'Vintage', 'Beauty', 'Accessories', 'Shoes', 'Brands', 'Sale'
@@ -32,7 +31,6 @@ class Menu extends React.Component {
   showList(category) {
     if (this.props.show) {
       let name =category.toLowerCase().split('\'').join('');
-      console.log('MENU NAME',name);
       if (name) {
         let list = this[name].map((item) => {
           return (
