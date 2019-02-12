@@ -13,10 +13,11 @@ class Navigation extends React.Component {
     };
   }
 
-  showSignin() {
+  showSignin(e) {
+    e.preventDefault();
     this.props.ignore();
-    this.setState({show: true});
     document.body.style.setProperty('overflow', 'hidden');
+    this.setState({show: true}, () => window.scroll(0, this.props.position));
   }
 
   hideSignin() {
@@ -41,7 +42,7 @@ class Navigation extends React.Component {
         </div>
         <NavSearch />
         <div className='navbar-navigation-signin'>
-          <a className='navbar-navigation-signin-link' href='#' onClick={()=>this.showSignin()}>Sign in</a>
+          <a className='navbar-navigation-signin-link' href='#' onClick={(e)=>this.showSignin(e)}>Sign in</a>
           <SignIn show={this.state.show} hide={()=>this.hideSignin()}/>
         </div>
         <Cart />

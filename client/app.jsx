@@ -34,10 +34,7 @@ class App extends React.Component {
   };
 
   lockPosition() {
-    if (this.state.lock === true) {
-      return '-fixed';
-    }
-    return '';
+    return this.state.lock === true ? '-fixed' : '';
   }
 
   isBottom() {
@@ -45,8 +42,7 @@ class App extends React.Component {
   }
 
   ignorePosition() {
-    this.setState({ignore: true});
-    this.setState({scroll: window.pageYOffset})
+    this.setState({ignore: true, scroll: window.pageYOffset});
   }
 
   restorePosition() {
@@ -56,9 +52,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={'navbar-header' + this.lockPosition()}>
-        <Promo />
-        <Navigation ignore={this.ignorePosition} restore={this.restorePosition}/>
+      <div>
+        <div className={'navbar-header' + this.lockPosition()}>
+          <Promo />
+          <Navigation ignore={this.ignorePosition} restore={this.restorePosition} position={this.state.scroll}/>
+        </div>
+        <div className={'navbar-header-empty' + this.lockPosition()}></div>
+        <img src='top.png'></img>
+        <img src='mid.png'></img>
       </div>
     );
   }

@@ -6,7 +6,7 @@ class SignIn extends React.Component {
       return (
         <div className='navbar-signin'>
           <svg className='navbar-signin-x-icon' onClick={this.props.hide}>
-            <title id="close-svg-title">Close</title>
+            <title>Close</title>
             <rect x="-3.29308" y="8.98556" width="24.58615" height="0.86969" transform="translate(-4.0252 9.12314) rotate(-45)"></rect>
             <rect x="8.56515" y="-2.87267" width="0.86969" height="24.58615" transform="translate(-4.0252 9.12314) rotate(-45)"></rect>
           </svg>
