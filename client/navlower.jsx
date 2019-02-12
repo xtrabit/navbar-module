@@ -16,7 +16,7 @@ class NavLower extends React.Component {
         <li>Socks + Underwear</li>
         <li>Vintage</li>
         <li>Grooming</li>
-        <li>Sale</li>
+        <li className='navbar-sale'>Sale</li>
       </ul>
     );
   }
