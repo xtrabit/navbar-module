@@ -1,9 +1,10 @@
 import React from 'react';
 
 class Promo extends React.Component {
+
   render() {
     return (
-      <div className='navbar-header-promo'>
+      <div id='promo' className='navbar-header-promo'>
         <span className='navbar-promo-pretitle'>
           Limited Time Only · In Stores & Online
         </span>
