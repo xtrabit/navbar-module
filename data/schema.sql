@@ -19,13 +19,24 @@ CREATE TABLE inventory (
   PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE `users` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `email` CHAR(255) NULL DEFAULT NULL,
   `password` CHAR(32) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
+);
+
+DROP TABLE IF EXISTS cart;
+
+CREATE TABLE cart (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `user` CHAR(127) NULL DEFAULT NULL,
+  `item_id` INTEGER NULL DEFAULT NULL,
+  `qty` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`item_id`) REFERENCES inventory(`id`)
 );
 
 INSERT into inventory (image_url, item_name, style, color, size, price) VALUES ("https://s3.amazonaws.com/navbarpictures/tshirts/40079881_023_b.jpeg","Patagonia Woven Pullover T-Shirt",98168657,"purple","XS","31.06");

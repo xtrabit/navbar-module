@@ -45,7 +45,7 @@ class Navigation extends React.Component {
           <a className='navbar-navigation-signin-link' href='#' onClick={(e)=>this.showSignin(e)}>Sign in</a>
           <SignIn show={this.state.show} hide={()=>this.hideSignin()}/>
         </div>
-        <Cart item={this.props.item}/>
+        <Cart item={this.props.item} qty={this.props.qty}/>
       </div>
     );
   }

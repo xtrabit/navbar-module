@@ -73,7 +73,7 @@ class Cart extends React.Component {
             </svg>
           </span>
           <span>
-            <div className='navbar-navigation-cart-qty'>2</div>
+            {this.props.qty ? <div className='navbar-navigation-cart-qty'>{this.props.qty}</div> : null}
           </span>
         </a>
         {this.renderCart()}

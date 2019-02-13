@@ -16,15 +16,24 @@ app.get('/', function(req, res) {
   res.send('helloooooo!!')
 });
 
+app.get('/emptycart/:user', function(req, res) {
+  let user = req.params.user;
+  db.emptyCart(user);
+  res.end();
+});
+
 app.get('/addtocart/:user', function(req, res) {
   let user = req.params.user;
-  console.log('USER', user);
   db.getRandomItem(function(err, data) {
     if (err) {
       return console.log(err);
     }
-    console.log('Data at SERVER', data);
-    res.send(data);
+    db.addItemToCart(user, data.id, function(err, qty) {
+      if (err) {
+        return console.log(err);
+      }
+      res.send({item: data, qty: qty});
+    })
   })
 });
 
