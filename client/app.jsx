@@ -8,11 +8,14 @@ class App extends React.Component {
     this.state = {
       lock: false,
       ignore: false,
-      scroll: 0
+      scroll: 0,
+      lastItem: null,
+      user: 'anonymous'
     }
     this.trackScrolling = this.trackScrolling.bind(this);
     this.ignorePosition = this.ignorePosition.bind(this);
     this.restorePosition = this.restorePosition.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -50,12 +53,22 @@ class App extends React.Component {
     window.scroll(0, this.state.scroll);
   }
 
+  addItemToCart() {
+    fetch(`http://localhost:3001/addtocart/${this.state.user}`)
+    .then(res => res.json())
+    .then(res => this.setState({lastItem: res}))
+    .catch((err) => console.error(err));
+  }
+
   render() {
     return (
       <div>
         <div className={'navbar-header' + this.lockPosition()}>
-          <Promo />
-          <Navigation ignore={this.ignorePosition} restore={this.restorePosition} position={this.state.scroll}/>
+          <Promo addItemToCart={this.addItemToCart}/>
+          <Navigation ignore={this.ignorePosition}
+            restore={this.restorePosition}
+            position={this.state.scroll}
+            item={this.state.lastItem}/>
         </div>
         <div className={'navbar-header-empty' + this.lockPosition()}></div>
         <img src='top.png'></img>

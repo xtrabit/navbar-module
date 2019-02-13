@@ -10,6 +10,13 @@ class Cart extends React.Component {
     this.showCart = this.showCart.bind(this);
     this.hideCart = this.hideCart.bind(this);
     this.launchCart = this.launchCart.bind(this);
+    this.clearTimeout;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.item !== prevProps.item) {
+      this.launchCart();
+    }
   }
 
   launchCart() {
@@ -19,33 +26,34 @@ class Cart extends React.Component {
 
   showCart() {
     this.setState({show: true, hide: false});
+    clearTimeout(this.clearTimeout);
   }
 
   hideCart() {
     this.setState({hide: true});
-    setTimeout(() => {
+    this.clearTimeout = setTimeout(() => {
       if (this.state.hide) {
         this.setState({show: false});
       }
-    }, 1500);
+    }, 2000);
   }
 
   renderCart() {
-    if (this.state.show) {
+    if (this.state.show && this.props.item) {
       return (
         <div className='navbar-cart-container' onMouseLeave={this.hideCart} onMouseEnter={this.showCart}>
           <h2 className='navbar-cart-header'>
-            <span className='navbar-cart-header-qty'>2</span> item added to your bag
+            <span className='navbar-cart-header-qty'>1</span> item added to your bag
           </h2>
           <div className='navbar-cart-item'>
             <div>
-              <img className='navbar-cart-item-img' src='https://s3.amazonaws.com/navbarpictures/tshirts/46893517_023_b.jpeg'></img>
+              <img className='navbar-cart-item-img' src={this.props.item.image_url}></img>
             </div>
             <div className='navbar-cart-item-details'>
-              <p className='navbar-cart-item-description'>Champion Script Ink Long Sleeve Tee</p>
-              <p className='navbar-cart-item-description-price'>39.99</p>
-              <p className='navbar-cart-item-description-color'>Grey</p>
-              <p className='navbar-cart-item-description-size'>M</p>
+              <p className='navbar-cart-item-description'>{this.props.item.item_name}</p>
+              <p className='navbar-cart-item-description-price'>{this.props.item.price}</p>
+              <p className='navbar-cart-item-description-color'>{this.props.item.color}</p>
+              <p className='navbar-cart-item-description-size'>{this.props.item.size}</p>
             </div>
           </div>
           <button className='navbar-cart-button-checkout'>Checkout</button>
@@ -57,7 +65,7 @@ class Cart extends React.Component {
   render() {
     return (
       <div className='navbar-navigation-cart-container'>
-        <a href="#" onClick={this.launchCart}>
+        <a href="#">
           <span className='navbar-navigation-cart'>
             <svg height='18' width='18' >
               <title>Bag</title>

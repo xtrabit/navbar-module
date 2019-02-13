@@ -16,6 +16,18 @@ app.get('/', function(req, res) {
   res.send('helloooooo!!')
 });
 
+app.get('/addtocart/:user', function(req, res) {
+  let user = req.params.user;
+  console.log('USER', user);
+  db.getRandomItem(function(err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('Data at SERVER', data);
+    res.send(data);
+  })
+});
+
 app.get('/:itemName', function(req, res) {
   let itemName = req.params.itemName;
   db.getItem(JSON.parse(itemName), function(err, data) {

@@ -22,7 +22,19 @@ const getItem = function(itemName, callback) {
   });
 };
 
+const getRandomItem = function(callback) {
+  db.query(('SELECT * FROM inventory'), function(err, res) {
+    if (err) {
+      console.log('ERROR inventory', err);
+      return callback(err);
+    }
+    let random = res[~~(Math.random() * res.length)];
+    callback(null, random);
+  });
+};
+
 module.exports = {
-  getItem
+  getItem,
+  getRandomItem
 };
 
