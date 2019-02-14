@@ -48,7 +48,7 @@ class Navigation extends React.Component {
             <NavLower />
           </nav>
         </div>
-        <NavSearch />
+        <NavSearch user={this.props.user}/>
         <div className='navbar-navigation-signin'>
           {this.state.user === 'anonymous'
             ? <a className='navbar-navigation-signin-link' href='#' onClick={(e)=>this.showSignin(e)}>Sign in</a>

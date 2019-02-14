@@ -22,7 +22,7 @@ app.get('/emptycart/:user', function(req, res) {
   res.end();
 });
 
-app.get('/addtocart/:user', function(req, res) {
+app.get('/addrandomtocart/:user', function(req, res) {
   let user = req.params.user;
   db.getRandomItem(function(err, data) {
     if (err) {

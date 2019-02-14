@@ -1,6 +1,20 @@
 import React from 'react';
 
 class Popular extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: ''
+    };
+  }
+
+  addItemToCart(item) {
+    fetch(`http://localhost:3001/addtocart/${this.props.user}/item`)
+    // .then(res => res.json())
+    // .then(res => this.setState({lastItem: res.item, qty: res.qty}))
+    .catch((err) => console.error(err));
+  }
+
   render() {
     return (
       <div className='navbar-search-popular'>
