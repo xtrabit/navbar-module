@@ -1,12 +1,32 @@
 import React from 'react';
 
 class Trending extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      trending: [],
+      suggestions: [],
+      searchStr: ''
+    };
+  }
+
+  componentDidUpdate() {
+    if (this.props.searchStr !== this.state.searchStr) {
+      this.setState({trending: this.props.trending,
+        suggestions: this.props.searchStrFound,
+        searchStr: this.props.searchStr})
+    }
+  }
 
   getTrending() {
-    let list = ['champion', 'guess', 'kappa', 'vans', 'dr martens'];
-    return list.map((item) => {
+    if (this.props.searchStr && this.state.trending) {
+      var list = this.state.trending;
+    } else {
+      var list = ['champion', 'guess', 'kappa', 'vans', 'dr martens'];
+    }
+    return list.map((item, index) => {
       return (
-        <li className='navbar-trending-item' key={item}>
+        <li className='navbar-trending-item' key={item + index}>
           <p>{item}</p>
         </li>
       );
@@ -14,22 +34,27 @@ class Trending extends React.Component {
   }
 
   getSuggestion() {
-    let list = ['down', 'button down', 'dos', 'button down shirt', 'down shirt'];
-    return list.map((item) => {
-      return (
-        <li className='navbar-suggestions-item' key={item}>
-          <p>{item}</p>
-        </li>
-      );
-    });
+    if (this.props.searchStr && this.state.suggestions) {
+      var list = this.state.suggestions;
+    } else {
+      return null;
+    }
+      return <ul className='navbar-suggestions-list'>
+        {list.map((item, index) => {
+          return (
+            <li className='navbar-suggestions-item' key={item + index}>
+              <p>{item}</p>
+            </li>
+          );}
+        )}
+      </ul>
+    return null;
   }
 
   render() {
     return (
       <div className='navbar-search-trending'>
-        <ul className='navbar-suggestions-list'>
-          {this.getSuggestion()}
-        </ul>
+        {this.getSuggestion()}
         <h3 className='navbar-trending-header'>TRENDING</h3>
         <ul className='navbar-trending-list'>
             {this.getTrending()}

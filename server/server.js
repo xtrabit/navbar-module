@@ -16,6 +16,16 @@ app.get('/', function(req, res) {
   res.send('helloooooo!!')
 });
 
+app.get('/search/:str', function(req, res) {
+  let str = req.params.str;
+  db.search(str, function(err, items) {
+    if (err) {
+      return console.error(err);
+    }
+    res.send(items);
+  });
+});
+
 app.get('/emptycart/:user', function(req, res) {
   let user = req.params.user;
   db.emptyCart(user);
@@ -39,7 +49,6 @@ app.get('/addrandomtocart/:user', function(req, res) {
       if (err) {
         return console.log(err);
       }
-      console.log(data)
       res.send({item: data, qty: qty});
     })
   })

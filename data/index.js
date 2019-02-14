@@ -110,10 +110,101 @@ const getUserQty = function(user, callback) {
     let quantity = res.reduce((acc, item) => {
       return acc + item.qty;
     }, 0);
-    console.log('getUserQty : ', quantity)
     callback(null, '' + quantity);
   });
 };
+
+const search = function(str, callback) {
+  db.query(('SELECT * FROM inventory'), function(err, res) {
+    if (err) {
+      console.log('ERROR inventory', err);
+      return callback(err);
+    }
+    let found = findInItems(str, res);
+    callback(null, found);
+  });
+}
+
+const findInItems = function(str, items) {
+  let result = {items: [], trending: [], found: []};
+  let qty = 0;
+  for (var i = 0; i < items.length; i++) {
+    let found = findStr(str, items[i].item_name);
+    if (found) {
+      result.items.push(items[i]);
+      result.items[result.items.length - 1].match = found.match;
+      if (qty < 5) {
+        result.trending.push(found.trending);
+        result.found.push(found.found);
+        qty++;
+      }
+    }
+  }
+  result.items = sortMatches(result.items);
+  return result;
+}
+
+const findStr = function(str, itemName) {
+  itemName = itemName.toLowerCase();
+  let name = itemName.split(' ');
+  let keys = str.split(' ');
+  let trending;
+  let found;
+  let match = 0;
+
+  let runAgain = function(str, itemName) {
+    let keys = str.split(' ').map((item) => {
+      let temp = item.slice(0, -1);
+      return temp ? temp : item;
+    }).join(' ');
+    if (keys.length === str.length) return null;
+    let result = findStr(keys, itemName);
+    if (result && result.trending) {
+      return result;
+    } else if (result !== null) {
+      return runAgain(str, itemName);
+    }
+    return null;
+  }
+
+  for (var i = 0; i < keys.length; i++) {
+    for (var j = 0; j < name.length; j++) {
+      if (name[j].includes(keys[i])) {
+        trending = name[0];
+        found = name[j];
+        match = keys[i].length;
+        if (j < name.length - 1) {
+          found += ' ' + name[j + 1];
+        }
+      }
+      if (trending) break;
+    }
+    if (trending) break;
+  }
+  if (!trending) {
+    return runAgain(str, itemName)
+  }
+  return {trending: trending, found: found, match: match};
+}
+
+const sortMatches = function(items) {
+  let original = [...items];
+  let sort = function(items) {
+    let sorted = true;
+    for (var i = 0; i < items.length - 1; i++) {
+      if (items[i].match < items[i + 1].match) {
+        sorted = false;
+        let temp = items[i];
+        items[i] = items[i + 1];
+        items[i + 1] = temp;
+      }
+    }
+    return !sorted ? sort(items) : items;
+  }
+  let sorted = sort(items).slice(0, 3);
+
+  return sorted;
+}
 
 module.exports = {
   getItem,
@@ -121,6 +212,7 @@ module.exports = {
   addItemToCart,
   emptyCart,
   transferCart,
-  get3RandomItems
+  get3RandomItems,
+  search
 };
 
