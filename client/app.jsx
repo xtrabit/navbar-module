@@ -17,6 +17,7 @@ class App extends React.Component {
     this.ignorePosition = this.ignorePosition.bind(this);
     this.restorePosition = this.restorePosition.bind(this);
     this.addRandomItemToCart = this.addRandomItemToCart.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
     this.emptyAnonymousCart = this.emptyAnonymousCart.bind(this);
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
@@ -70,10 +71,10 @@ class App extends React.Component {
     .catch((err) => console.error(err));
   }
 
-  addItemToCart() {
-    fetch(`http://localhost:3001/addtocart/${this.state.user}`)
+  addItemToCart(item) {
+    fetch(`http://localhost:3001/addtocart/${this.state.user}/${item.id}`)
     .then(res => res.json())
-    .then(res => this.setState({lastItem: res.item, qty: res.qty}))
+    .then(res => this.setState({lastItem: item, qty: res}))
     .catch((err) => console.error(err));
   }
 
@@ -103,7 +104,8 @@ class App extends React.Component {
             qty={this.state.qty}
             signIn={this.signIn}
             signOut={this.signOut}
-            user={this.state.user}/>
+            user={this.state.user}
+            addItemToCart={this.addItemToCart}/>
         </div>
         <div className={'navbar-header-empty' + this.lockPosition()}></div>
         <img src='top.png'></img>

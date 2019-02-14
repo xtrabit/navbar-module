@@ -33,6 +33,21 @@ const getRandomItem = function(callback) {
   });
 };
 
+const get3RandomItems = function(callback) {
+  db.query(('SELECT * FROM inventory'), function(err, res) {
+    if (err) {
+      console.log('ERROR inventory', err);
+      return callback(err);
+    }
+    let threeItems = [];
+    for (var i = 0; i < 3; i++) {
+      let random = res[~~(Math.random() * res.length)];
+      threeItems.push(random);
+    }
+    callback(null, threeItems);
+  });
+};
+
 const addItemToCart = function(user, item_id, callback) {
   // item_id = 60;
   db.query(('SELECT id FROM cart WHERE item_id = ' + item_id + ' AND user = "' + user + '"'), function(err, res) {
@@ -96,7 +111,7 @@ const getUserQty = function(user, callback) {
       return acc + item.qty;
     }, 0);
     console.log('getUserQty : ', quantity)
-    callback(null, quantity);
+    callback(null, '' + quantity);
   });
 };
 
@@ -105,6 +120,7 @@ module.exports = {
   getRandomItem,
   addItemToCart,
   emptyCart,
-  transferCart
+  transferCart,
+  get3RandomItems
 };
 
