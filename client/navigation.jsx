@@ -43,7 +43,7 @@ class Navigation extends React.Component {
         <NavSearch />
         <div className='navbar-navigation-signin'>
           <a className='navbar-navigation-signin-link' href='#' onClick={(e)=>this.showSignin(e)}>Sign in</a>
-          <SignIn show={this.state.show} hide={()=>this.hideSignin()}/>
+          <SignIn show={this.state.show} hide={()=>this.hideSignin()} signIn={this.props.signIn}/>
         </div>
         <Cart item={this.props.item} qty={this.props.qty}/>
       </div>

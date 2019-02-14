@@ -18,6 +18,7 @@ class App extends React.Component {
     this.restorePosition = this.restorePosition.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
     this.emptyAnonymousCart = this.emptyAnonymousCart.bind(this);
+    this.signIn = this.signIn.bind(this);
   }
 
   componentDidMount() {
@@ -64,8 +65,17 @@ class App extends React.Component {
   addItemToCart() {
     fetch(`http://localhost:3001/addtocart/${this.state.user}`)
     .then(res => res.json())
-    .then(res => {console.log('qty--', res.qty);return this.setState({lastItem: res.item, qty: res.qty})})
+    .then(res => this.setState({lastItem: res.item, qty: res.qty}))
     .catch((err) => console.error(err));
+  }
+
+  signIn(user) {
+    this.setState({user: user}, () => {
+      fetch(`http://localhost:3001/signin/${this.state.user}`)
+      .then(res => res.json())
+      .then(res => this.setState({qty: res}))
+      .catch((err) => console.error(err));
+    });
   }
 
   render() {
@@ -77,7 +87,8 @@ class App extends React.Component {
             restore={this.restorePosition}
             position={this.state.scroll}
             item={this.state.lastItem}
-            qty={this.state.qty}/>
+            qty={this.state.qty}
+            signIn={this.signIn}/>
         </div>
         <div className={'navbar-header-empty' + this.lockPosition()}></div>
         <img src='top.png'></img>

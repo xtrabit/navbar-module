@@ -14,7 +14,7 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.item !== prevProps.item) {
+    if (this.props.item !== prevProps.item && this.props.item) {
       this.launchCart();
     }
   }

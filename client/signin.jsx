@@ -1,6 +1,19 @@
 import React from 'react';
 
 class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state= {
+      user: 'some@email.com'
+    };
+    this.signIn = this.signIn.bind(this);
+  }
+
+  signIn() {
+    this.props.signIn(this.state.user);
+    this.props.hide();
+  }
+
   render() {
     if (this.props.show) {
       return (
@@ -15,7 +28,7 @@ class SignIn extends React.Component {
             <form className='navbar-signin-form'>
               <div className='navbar-signin-emai'>
                 <label>Email *</label><br/>
-                <input id="email" type="email" name="email" spellCheck="false" value='some@email.com'></input>
+                <input id="email" type="email" name="email" spellCheck="false" value={this.state.user}></input>
               </div>
               <div className='navbar-signin-password'>
                 <label>Password *</label><br/>
@@ -25,7 +38,7 @@ class SignIn extends React.Component {
                 <a className='navbar-signin-forgot-link' href='#'>Forgot Your Password?</a>
               </div>
               <div className='navbar-signin-controls'>
-                <button className='navbar-signin-button-signin' type='submit'>Sign In</button>
+                <button className='navbar-signin-button-signin' onClick={this.signIn}>Sign In</button>
                 <button className='navbar-signin-button-cancel' type='button' onClick={this.props.hide}>Cancel</button>
               </div>
             </form>

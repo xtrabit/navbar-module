@@ -37,6 +37,16 @@ app.get('/addtocart/:user', function(req, res) {
   })
 });
 
+app.get('/signin/:user', function(req, res) {
+  let user = req.params.user;
+  db.transferCart(user, function(err, qty) {
+    if (err) {
+      return console.log(err);
+    }
+    res.send(qty + '');
+  });
+});
+
 app.get('/:itemName', function(req, res) {
   let itemName = req.params.itemName;
   db.getItem(JSON.parse(itemName), function(err, data) {
