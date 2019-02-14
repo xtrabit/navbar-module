@@ -7,6 +7,7 @@ class SignIn extends React.Component {
       user: 'some@email.com'
     };
     this.signIn = this.signIn.bind(this);
+    this.hideByClickingBackground = this.hideByClickingBackground.bind(this);
   }
 
   signIn() {
@@ -14,10 +15,16 @@ class SignIn extends React.Component {
     this.props.hide();
   }
 
+  hideByClickingBackground(e) {
+    if (e.target.className === 'navbar-signin-background') {
+      this.props.hide();
+    }
+  }
+
   render() {
     if (this.props.show) {
       return (
-        <div className='navbar-signin-background'>
+        <div className='navbar-signin-background' onClick={this.hideByClickingBackground}>
           <div className='navbar-signin'>
             <svg className='navbar-signin-x-icon' onClick={this.props.hide}>
               <title>Close</title>
