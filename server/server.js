@@ -16,6 +16,37 @@ app.get('/', function(req, res) {
   res.send('helloooooo!!')
 });
 
+app.get('/emptycart/:user', function(req, res) {
+  let user = req.params.user;
+  db.emptyCart(user);
+  res.end();
+});
+
+app.get('/addtocart/:user', function(req, res) {
+  let user = req.params.user;
+  db.getRandomItem(function(err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    db.addItemToCart(user, data.id, function(err, qty) {
+      if (err) {
+        return console.log(err);
+      }
+      res.send({item: data, qty: qty});
+    })
+  })
+});
+
+app.get('/signin/:user', function(req, res) {
+  let user = req.params.user;
+  db.transferCart(user, function(err, qty) {
+    if (err) {
+      return console.log(err);
+    }
+    res.send(qty + '');
+  });
+});
+
 app.get('/:itemName', function(req, res) {
   let itemName = req.params.itemName;
   db.getItem(JSON.parse(itemName), function(err, data) {

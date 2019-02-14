@@ -1,10 +1,30 @@
 import React from 'react';
 
 class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state= {
+      user: 'some@email.com'
+    };
+    this.signIn = this.signIn.bind(this);
+    this.hideByClickingBackground = this.hideByClickingBackground.bind(this);
+  }
+
+  signIn() {
+    this.props.signIn(this.state.user);
+    this.props.hide();
+  }
+
+  hideByClickingBackground(e) {
+    if (e.target.className === 'navbar-signin-background') {
+      this.props.hide();
+    }
+  }
+
   render() {
     if (this.props.show) {
       return (
-        <div className='navbar-signin-background'>
+        <div className='navbar-signin-background' onClick={this.hideByClickingBackground}>
           <div className='navbar-signin'>
             <svg className='navbar-signin-x-icon' onClick={this.props.hide}>
               <title>Close</title>
@@ -15,17 +35,17 @@ class SignIn extends React.Component {
             <form className='navbar-signin-form'>
               <div className='navbar-signin-emai'>
                 <label>Email *</label><br/>
-                <input id="email" type="email" name="email" spellCheck="false" value='some@email.com'></input>
+                <input id="email" type="email" name="email" spellCheck="false" value={this.state.user} onChange={()=>{}}></input>
               </div>
               <div className='navbar-signin-password'>
                 <label>Password *</label><br/>
-                <input id="password" type="password" name="password" spellCheck="false" value='password'></input>
+                <input id="password" type="password" name="password" spellCheck="false" value='password' onChange={()=>{}}></input>
               </div>
               <div className='navbar-signin-forgot-link-wrapper'>
                 <a className='navbar-signin-forgot-link' href='#'>Forgot Your Password?</a>
               </div>
               <div className='navbar-signin-controls'>
-                <button className='navbar-signin-button-signin' type='submit'>Sign In</button>
+                <button className='navbar-signin-button-signin' onClick={this.signIn}>Sign In</button>
                 <button className='navbar-signin-button-cancel' type='button' onClick={this.props.hide}>Cancel</button>
               </div>
             </form>

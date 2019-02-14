@@ -8,19 +8,32 @@ class App extends React.Component {
     this.state = {
       lock: false,
       ignore: false,
-      scroll: 0
+      scroll: 0,
+      lastItem: null,
+      user: 'anonymous',
+      qty: 0
     }
     this.trackScrolling = this.trackScrolling.bind(this);
     this.ignorePosition = this.ignorePosition.bind(this);
     this.restorePosition = this.restorePosition.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
+    this.emptyAnonymousCart = this.emptyAnonymousCart.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('scroll', this.trackScrolling);
+    window.addEventListener("beforeunload", this.emptyAnonymousCart);
+  }
+
+  emptyAnonymousCart(e) {
+    fetch(`http://localhost:3001/emptycart/anonymous`).catch((err) => console.error(err));
   }
 
   componentWillUnmount() {
     document.removeEventListener('scroll', this.trackScrolling);
+    window.removeEventListener("beforeunload", this.emptyAnonymousCart);
   }
 
   trackScrolling () {
@@ -50,12 +63,40 @@ class App extends React.Component {
     window.scroll(0, this.state.scroll);
   }
 
+  addItemToCart() {
+    fetch(`http://localhost:3001/addtocart/${this.state.user}`)
+    .then(res => res.json())
+    .then(res => this.setState({lastItem: res.item, qty: res.qty}))
+    .catch((err) => console.error(err));
+  }
+
+  signIn(user) {
+    this.setState({user: user}, () => {
+      fetch(`http://localhost:3001/signin/${this.state.user}`)
+      .then(res => res.json())
+      .then(res => this.setState({qty: res}))
+      .catch((err) => console.error(err));
+    });
+  }
+
+  signOut() {
+    this.setState({user: 'anonymous', lastItem: null, qty: 0});
+    this.emptyAnonymousCart();
+  }
+
   render() {
     return (
       <div>
         <div className={'navbar-header' + this.lockPosition()}>
-          <Promo />
-          <Navigation ignore={this.ignorePosition} restore={this.restorePosition} position={this.state.scroll}/>
+          <Promo addItemToCart={this.addItemToCart}/>
+          <Navigation ignore={this.ignorePosition}
+            restore={this.restorePosition}
+            position={this.state.scroll}
+            item={this.state.lastItem}
+            qty={this.state.qty}
+            signIn={this.signIn}
+            signOut={this.signOut}
+            user={this.state.user}/>
         </div>
         <div className={'navbar-header-empty' + this.lockPosition()}></div>
         <img src='top.png'></img>
