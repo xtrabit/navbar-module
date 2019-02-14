@@ -35,11 +35,11 @@ class SignIn extends React.Component {
             <form className='navbar-signin-form'>
               <div className='navbar-signin-emai'>
                 <label>Email *</label><br/>
-                <input id="email" type="email" name="email" spellCheck="false" value={this.state.user}></input>
+                <input id="email" type="email" name="email" spellCheck="false" value={this.state.user} onChange={()=>{}}></input>
               </div>
               <div className='navbar-signin-password'>
                 <label>Password *</label><br/>
-                <input id="password" type="password" name="password" spellCheck="false" value='password'></input>
+                <input id="password" type="password" name="password" spellCheck="false" value='password' onChange={()=>{}}></input>
               </div>
               <div className='navbar-signin-forgot-link-wrapper'>
                 <a className='navbar-signin-forgot-link' href='#'>Forgot Your Password?</a>

@@ -19,6 +19,7 @@ class App extends React.Component {
     this.addItemToCart = this.addItemToCart.bind(this);
     this.emptyAnonymousCart = this.emptyAnonymousCart.bind(this);
     this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +79,11 @@ class App extends React.Component {
     });
   }
 
+  signOut() {
+    this.setState({user: 'anonymous', lastItem: null, qty: 0});
+    this.emptyAnonymousCart();
+  }
+
   render() {
     return (
       <div>
@@ -88,7 +94,9 @@ class App extends React.Component {
             position={this.state.scroll}
             item={this.state.lastItem}
             qty={this.state.qty}
-            signIn={this.signIn}/>
+            signIn={this.signIn}
+            signOut={this.signOut}
+            user={this.state.user}/>
         </div>
         <div className={'navbar-header-empty' + this.lockPosition()}></div>
         <img src='top.png'></img>
