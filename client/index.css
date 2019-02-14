@@ -3,10 +3,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: #f0f0f0;
-  height: 2000px;
-  display: block;
-  overflow: visible;
+  width: 100%;
 }
 .navbar-header-promo {
   height: 50px;
@@ -67,7 +64,6 @@ body {
   padding: 0 30px;
   z-index: 100;
   background-color: #fff;
-  /*box-sizing: border-box;*/
 }
 
 .navbar-navigation-upper {
@@ -123,8 +119,8 @@ body {
   width: 100%;
   height: 53px;
   border-bottom: none;
-  background-color: #ffffffc0;
-  opacity: .94;
+  background-color: #ffffff;
+  opacity: .95;
 }
 
 .navbar-navigation-logo {
@@ -228,7 +224,7 @@ body {
   top: 0;
   left: -10px;
   margin: 0;
-  background-color: #ffffffc0;
+  background-color: #ffffff;
   z-index: 5;
 }
 
@@ -470,4 +466,165 @@ li:hover {
   width: 100%;
   position: fixed;
   top: -50px;
+}
+
+/*
+              ##                                  ##
+              ##                                  ##
+
+    #####   ####      ######  ## ###            ####     ## ###
+   ##         ##     ##   ##  ###  ##             ##     ###  ##
+    ####      ##     ##   ##  ##   ##             ##     ##   ##
+       ##     ##     ##   ##  ##   ##             ##     ##   ##
+   #####    ######    ######  ##   ##           ######   ##   ##
+                          ##
+                      #####
+*/
+
+.navbar-signin {
+  position: fixed;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  top: calc((100vh - 496px) / 2);
+  left: calc((100% - 475px) / 2);
+  width: 475px;
+  height: 496px;
+  margin: 0;
+  padding: 40px 40px;
+  background-color: white;
+}
+
+.navbar-signin-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh + 52px);
+  background-color: #f5f5f5b0;
+  z-index: 20;
+}
+
+.navbar-signin-x-icon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  fill: #aaa;
+  cursor: pointer;
+}
+
+.navbar-signin-header {
+  font: 1.6rem "Francois One", sans-serif;
+  letter-spacing: .02rem;
+  color: #222;
+  padding: 0;
+  margin: 0 0 38px 0;
+}
+
+.navbar-signin-form {
+  font: .68rem helvetica, arial, sans-serif;
+  letter-spacing: .02rem;
+  text-align: left;
+  padding: 0 0 20px 0;
+  border-bottom: solid #aaa 1px;
+}
+
+.navbar-signin-emai, .navbar-signin-password {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.navbar-signin-form input {
+  font: .68rem helvetica, arial, sans-serif;
+  letter-spacing: .02rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+}
+
+.navbar-signin-password {
+
+}
+
+.navbar-signin-forgot-link {
+  color: #767676;
+}
+
+.navbar-signin-forgot-link-wrapper {
+  margin-bottom: 30px;
+}
+
+.navbar-signin-button-signin {
+  font: .9rem helvetica, arial, sans-serif;
+  letter-spacing: .04rem;
+  font-weight: bold;
+  height: 44px;
+  width: 264px;
+  background-color: #222;
+  color: #fff;
+  border: none;
+}
+
+.navbar-signin-button-cancel {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: #767676;
+  margin-left: 15px;
+}
+
+.navbar-signin-button-create {
+  font: .9rem helvetica, arial, sans-serif;
+  letter-spacing: .04rem;
+  font-weight: bold;
+  height: 44px;
+  width: 100%;
+  background-color: #fff;
+  color: #222;
+  border: solid #aaa 2px;
+  margin: 30px 0 0 0;
+}
+
+.navbar-signin-x-icon:hover {
+  fill: #222;
+}
+
+.navbar-signin-button-cancel:hover, .navbar-signin-forgot-link:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar-signin-button-signin:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+.navbar-signin-button-cancel:focus, .navbar-signin-button-signin:focus, .navbar-signin-button-create:focus {
+  outline: 0;
+}
+
+.navbar-signin-button-create:hover {
+  border-color: #ddd;
+  color: #767676;
+  cursor: pointer;
+}
+
+.navbar-signin-form input:focus {
+  outline-color: #767676;
+}
+
+.navbar-header-empty {
+  height: 52px;
+  width: 100%;
+}
+
+.navbar-header-empty-fixed {
+  height: 149px;
+  width: 100%;
 }

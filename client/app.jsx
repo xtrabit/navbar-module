@@ -6,9 +6,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lock: false
+      lock: false,
+      ignore: false,
+      scroll: 0
     }
     this.trackScrolling = this.trackScrolling.bind(this);
+    this.ignorePosition = this.ignorePosition.bind(this);
+    this.restorePosition = this.restorePosition.bind(this);
   }
 
   componentDidMount() {
@@ -20,30 +24,42 @@ class App extends React.Component {
   }
 
   trackScrolling () {
-    const wrappedElement = document.body;
-    if (this.isBottom(wrappedElement) && this.state.lock === false) {
-      setTimeout(()=>{this.isBottom(wrappedElement) ? this.setState({lock: true}) : null}, 200);
-    } else if (!this.isBottom(wrappedElement) && this.state.lock === true) {
-      this.setState({lock: false});
+    if (!this.state.ignore) {
+      if (this.isBottom() && this.state.lock === false) {
+        setTimeout(()=>{this.isBottom() ? this.setState({lock: true}) : null}, 200);
+      } else if (!this.isBottom() && this.state.lock === true) {
+        this.setState({lock: false});
+      }
     }
   };
 
   lockPosition() {
-    if (this.state.lock === true) {
-      return '-fixed';
-    }
-    return '';
+    return this.state.lock === true ? '-fixed' : '';
   }
 
-  isBottom(el) {
-  return el.getBoundingClientRect().top <= -52;
-}
+  isBottom() {
+    return window.pageYOffset >= 52;
+  }
+
+  ignorePosition() {
+    this.setState({ignore: true, scroll: window.pageYOffset});
+  }
+
+  restorePosition() {
+    this.setState({ignore: false});
+    window.scroll(0, this.state.scroll);
+  }
 
   render() {
     return (
-      <div className={'navbar-header' + this.lockPosition()}>
-        <Promo />
-        <Navigation />
+      <div>
+        <div className={'navbar-header' + this.lockPosition()}>
+          <Promo />
+          <Navigation ignore={this.ignorePosition} restore={this.restorePosition} position={this.state.scroll}/>
+        </div>
+        <div className={'navbar-header-empty' + this.lockPosition()}></div>
+        <img src='top.png'></img>
+        <img src='mid.png'></img>
       </div>
     );
   }
