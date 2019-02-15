@@ -104,6 +104,8 @@ class NavSearch extends React.Component {
           }
         })
         .catch((err) => console.error(err));
+      } else {
+        this.setState({items: null, trending: null, searchStrFound: null});
       }
     });
   }
