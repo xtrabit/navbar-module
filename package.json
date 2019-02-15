@@ -8,13 +8,16 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack",
     "watch": "webpack --watch",
     "start": "nodemon server/server.js",
-    "db-seed": "mysql -u root -p < data/schema.sql"
+    "db-seed": "mysql -u root -p < data/schema.sql",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --colors"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mysql": "^2.16.0"
@@ -23,13 +26,50 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "css-loader": "^2.1.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jest": "^24.1.0",
+    "jest-cli": "^24.1.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.2",
     "webpack-cli": "^3.2.3"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/client/enzyme.config.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "clearMocks": true,
+    "verbose": true,
+    "coverageDirectory": "coverage",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec|test).js?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "\\\\node_modules\\\\"
+    ],
+    "testURL": "http://localhost",
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/config/jest-transformer.js"
+    }
   }
 }
