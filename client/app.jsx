@@ -28,6 +28,16 @@ class App extends React.Component {
     window.addEventListener("beforeunload", this.emptyAnonymousCart);
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('sould update current', this.state)
+  //   console.log('sould update next', nextState)
+  //   if (nextState.qty !== this.state.qty) {
+  //     // this.setState(nextState);
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   emptyAnonymousCart(e) {
     fetch(`http://localhost:3001/emptycart/anonymous`).catch((err) => console.error(err));
   }
@@ -69,6 +79,7 @@ class App extends React.Component {
     .then(res => res.json())
     .then(res => this.setState({lastItem: res.item, qty: res.qty}))
     .catch((err) => console.error(err));
+
   }
 
   addItemToCart(item) {

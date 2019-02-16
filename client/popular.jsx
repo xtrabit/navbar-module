@@ -25,14 +25,18 @@ class Popular extends React.Component {
 
   addToCart(e) {
     let index = e.currentTarget.className;
-    this.props.addItemToCart(this.state.items[index]);
+    if (this.state.items !== null) {
+      this.props.addItemToCart(this.state.items[index]);
+    } else {
+      this.props.addItemToCart(this.state.promoItems[index]);
+    }
   }
 
   renderPopularItem(items) {
-    if ((!items || !(items && items.length)) || !this.props.searchStr) {
+    if (!items) {
       items = this.state.promoItems;
     }
-    if (items) {
+    if (items) { //promoItems are not instanteniously available
       return items.map((item, index) => {
         return (
           <div className={index} key={'a' + item.id}
