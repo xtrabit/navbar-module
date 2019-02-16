@@ -8,6 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "test-c": "jest --coverage",
     "test": "jest",
     "build": "webpack",
     "watch": "webpack --watch",
@@ -70,6 +71,7 @@
     "testURL": "http://localhost",
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ]
+    ],
+    "collectCoverage": true
   }
 }
