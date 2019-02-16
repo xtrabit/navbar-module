@@ -71,5 +71,5 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/config/jest-transformer.js"
     }
-  }
+  },
 }

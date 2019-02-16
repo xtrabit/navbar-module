@@ -65,23 +65,36 @@ describe('Search behavior', () => {
     //   });
     //   return p;
     // });
-
+    var t = 0;
     global.fetch = jest.fn().mockImplementation((a) => {
       console.log("fetch called with --> ", a)
-      var p = new Promise((resolve, reject) => {
-        resolve({
-          json: function() {
-            return {item: {id: 1, image_url: 'some/URL1',item_name: 'item name 1'},
-                          qty: 3};
-          }
+      if (t === 0) {
+        var p = new Promise((resolve, reject) => {
+          resolve({
+            json: function() {
+              return {item: {id: 1, image_url: 'some/URL1',item_name: 'item name 1'},
+                            qty: 3};
+            }
+          });
         });
-      });
+      }
+      // if (a === 'http://localhost:3001/addrandomtocart/anonymous') {
+      if (t === 1) {
+        var p = new Promise((resolve, reject) => {
+          resolve({
+            json: function() {
+              return {item: {id: 1, image_url: 'some/URL1',item_name: 'item name 1'},
+                            qty: 4};
+            }
+          });
+        });
+      }
+        t = 1;
       return p;
     });
 
-    const addRandomItemToCart = jest.fn((a) => {
-      return console.log("arguments-------", a);
-    });
+ //    jest.useFakeTimers();
+ // jest.runAllTimers();
 
     // const wrapper = shallow(<Promo addRandomItemToCart={addRandomItemToCart}/>);
     const wrapper = mount(<App />,{ attachTo: document.body });
@@ -90,6 +103,16 @@ describe('Search behavior', () => {
     expect(wrapper.find('.navbar-promo-link').simulate('click'));
     expect(fetch).toHaveBeenCalled();
     expect(fetch).toHaveBeenCalledWith('http://localhost:3001/addrandomtocart/anonymous');
-    expect(wrapper.find('.navbar-navigation-cart-qty').exists()).toBe(true);
+    // expect(wrapper.find('.navbar-navigation-cart-qty').exists()).toBe(true);
+    // expect(wrapper.find(Cart).props()).toEqual(true);
+    // wrapper.update();
+    // expect(wrapper.state('qty')).toEqual(0);
+    // for (var i = 0; i < 10000000000; i++) {
+    //   let d = i;
+    // }
+    wrapper.forceUpdate();
+    expect(wrapper.find('.navbar-promo-link').simulate('click'));
+    // wrapper.update();
+    expect(wrapper.state('qty')).toEqual(3);
   });
 });
