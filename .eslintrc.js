@@ -1,10 +1,15 @@
-/**
- * These rules enforce the Hack Reactor Style Guide
- *
- * Visit this repo for more information:
- *   https://github.com/reactorcore/eslint-config-hackreactor
- */
-
 module.exports = {
-  extends: './node_modules/eslint-config-hackreactor/index.js'
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": ['jsx-a11y'],
+  "rules": {
+    "object-curly-spacing": "off",
+    'react/prop-types': 'off',
+    'comma-dangle': 'off'
+  },
+  "globals": {"fetch": false},
+  "env": {
+    "browser": true,
+    "node": true
+  }
 };
