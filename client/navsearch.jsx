@@ -23,7 +23,7 @@ class NavSearch extends React.Component {
   }
   hideSuggestions(e) {
     this.contractSearch();
-    this.setState({showSuggestions: false});
+    this.setState({showSuggestions: false, searchStr: ''});
     document.removeEventListener('click', this.hideSuggestions);
   }
   expandSearch() {
