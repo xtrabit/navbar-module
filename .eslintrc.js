@@ -3,9 +3,13 @@ module.exports = {
   "parser": "babel-eslint",
   "plugins": ['jsx-a11y'],
   "rules": {
-    "object-curly-spacing": "off",
+    "object-curly-spacing": ["error", "never"],
     'react/prop-types': 'off',
-    'comma-dangle': 'off'
+    'comma-dangle': 'off',
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "class-methods-use-this": "warn",
+    "no-unused-expressions": ["warn", {"allowTernary": true, "allowShortCircuit": true}],
+    "no-confusing-arrow": ["error", {"allowParens": true}]
   },
   "globals": {"fetch": false},
   "env": {

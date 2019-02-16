@@ -133,4 +133,10 @@ describe('Popular section', () => {
     wrapper.find('.navbar-popular-item-image').first().simulate('click');
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  // it('Expect change', () => {
+  //   const wrapper = mount(<NavSearch />);
+  //   wrapper.find('.navbar-search-input').simulate('change', { target: { value: "foo" }});
+  //   expect(wrapper.find('.navbar-search-input').instance().value).toEqual('foo');
+  // });
 });
