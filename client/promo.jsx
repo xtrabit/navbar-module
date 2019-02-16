@@ -16,7 +16,7 @@ class Promo extends React.Component {
           UP TO 40% OFF OUT FROM UNDER INTIMATES & LOUNGE
         </p>
         <div className='navbar-promo-link-container'>
-          <a className='navbar-promo-link' href='#' onClick={this.props.addItemToCart}>
+          <a className='navbar-promo-link' href='#' onClick={this.props.addRandomItemToCart}>
             Shop
           </a>
 

@@ -16,6 +16,7 @@ class App extends React.Component {
     this.trackScrolling = this.trackScrolling.bind(this);
     this.ignorePosition = this.ignorePosition.bind(this);
     this.restorePosition = this.restorePosition.bind(this);
+    this.addRandomItemToCart = this.addRandomItemToCart.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
     this.emptyAnonymousCart = this.emptyAnonymousCart.bind(this);
     this.signIn = this.signIn.bind(this);
@@ -63,10 +64,17 @@ class App extends React.Component {
     window.scroll(0, this.state.scroll);
   }
 
-  addItemToCart() {
-    fetch(`http://localhost:3001/addtocart/${this.state.user}`)
+  addRandomItemToCart() {
+    fetch(`http://localhost:3001/addrandomtocart/${this.state.user}`)
     .then(res => res.json())
     .then(res => this.setState({lastItem: res.item, qty: res.qty}))
+    .catch((err) => console.error(err));
+  }
+
+  addItemToCart(item) {
+    fetch(`http://localhost:3001/addtocart/${this.state.user}/${item.id}`)
+    .then(res => res.json())
+    .then(res => this.setState({lastItem: item, qty: res}))
     .catch((err) => console.error(err));
   }
 
@@ -88,7 +96,7 @@ class App extends React.Component {
     return (
       <div>
         <div className={'navbar-header' + this.lockPosition()}>
-          <Promo addItemToCart={this.addItemToCart}/>
+          <Promo addRandomItemToCart={this.addRandomItemToCart}/>
           <Navigation ignore={this.ignorePosition}
             restore={this.restorePosition}
             position={this.state.scroll}
@@ -96,7 +104,8 @@ class App extends React.Component {
             qty={this.state.qty}
             signIn={this.signIn}
             signOut={this.signOut}
-            user={this.state.user}/>
+            user={this.state.user}
+            addItemToCart={this.addItemToCart}/>
         </div>
         <div className={'navbar-header-empty' + this.lockPosition()}></div>
         <img src='top.png'></img>

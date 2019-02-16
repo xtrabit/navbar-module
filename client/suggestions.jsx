@@ -11,8 +11,14 @@ class Suggestions extends React.Component {
     if (this.props.show) {
       return (
         <div className='navbar-search-suggestions'>
-          <Popular />
-          <Trending />
+          <Popular user={this.props.user}
+            addItemToCart={this.props.addItemToCart}
+            items={this.props.items}
+            searchStr={this.props.searchStr}
+            />
+          <Trending searchStrFound={this.props.searchStrFound}
+            trending={this.props.trending}
+            searchStr={this.props.searchStr}/>
         </div>
       );
     }

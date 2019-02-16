@@ -261,6 +261,19 @@ li:hover {
   border-bottom: solid #aaa 1px;
 }
 
+.navbar-popular-header p {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-popular-header-search-str {
+  font-size: .68rem;
+  line-height: .8;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
 .navbar-popular-container {
 
   display: flex;
@@ -273,9 +286,10 @@ li:hover {
 }
 
 .navbar-popular-item-header {
-  font: .68rem helvetica, arial, sans-serif;
+  font: .68rem/1.3 helvetica, arial, sans-serif;
   letter-spacing: .03rem;
   color: #767676;
+  margin-top: 5px;
 }
 
 .navbar-popular-item-header:hover {
