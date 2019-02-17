@@ -15,30 +15,41 @@ class Navigation extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.user !== prevProps.user) {
-      this.setState({user: this.props.user});
+  componentDidUpdate(prevProps) {
+    const {user} = this.props;
+    if (user !== prevProps.user) {
+      this.setState({user});
     }
   }
 
   showSignin(e) {
+    const {ignore} = this.props; // destructuring here prevents position from updating???
     e.preventDefault();
-    this.props.ignore();
+    ignore();
     document.body.style.setProperty('overflow', 'hidden');
-    this.setState({showSignIn: true}, () => window.scroll(0, this.props.position));
+    this.setState({showSignIn: true}, () => window.scroll(0, this.props.position)); // eslint-disable-line
   }
 
   hideSignin() {
+    const {restore} = this.props;
     this.setState({showSignIn: false});
-    this.props.restore();
+    restore();
     document.body.style.setProperty('overflow', 'visible');
   }
 
   render() {
+    const {
+      user,
+      addItemToCart,
+      signOut,
+      signIn,
+      item,
+      qty
+    } = this.props;
     return (
       <div className='navbar-header-navigation'>
         <div className='navbar-navigation-logo'>
-          <img className='navbar-navigation-logo-image' src='valentines_updated.gif'></img>
+          <img className='navbar-navigation-logo-image' src='valentines_updated.gif' alt='' />
         </div>
         <div className='navbar-navigation-container'>
           <nav className='navbar-navigation-main'>
@@ -48,15 +59,14 @@ class Navigation extends React.Component {
             <NavLower />
           </nav>
         </div>
-        <NavSearch user={this.props.user} addItemToCart={this.props.addItemToCart}/>
+        <NavSearch user={user} addItemToCart={addItemToCart} />
         <div className='navbar-navigation-signin'>
           {this.state.user === 'anonymous'
-            ? <a className='navbar-navigation-signin-link' href='#' onClick={(e)=>this.showSignin(e)}>Sign in</a>
-            : <Account signOut={this.props.signOut}/>}
-          <SignIn show={this.state.showSignIn} hide={()=>this.hideSignin()} signIn={this.props.signIn}/>
-
+            ? <a className='navbar-navigation-signin-link' href='#' onClick={e => this.showSignin(e)}>Sign in</a>
+            : <Account signOut={signOut} />}
+          <SignIn show={this.state.showSignIn} hide={() => this.hideSignin()} signIn={signIn} />
         </div>
-        <Cart item={this.props.item} qty={this.props.qty}/>
+        <Cart item={item} qty={qty} />
       </div>
     );
   }

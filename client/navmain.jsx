@@ -21,7 +21,7 @@ class NavMain extends React.Component {
     event.preventDefault();
     if (this.state.nextMenuName === event.target.innerHTML && this.state.hideMenu !== true) {
       this.setState({showMenu: true});
-      this.setState({menuName: event.target.innerHTML})
+      this.setState({menuName: event.target.innerHTML});
     }
   }
 
@@ -52,18 +52,22 @@ class NavMain extends React.Component {
   render() {
     return (
       <div>
-      <ul className='navbar-navigation-upper'>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Women's</li>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-selected'>Men's</li>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Home</li>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Lifestyle</li>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Beauty</li>
-        <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-sale'>Sale</li>
-      </ul>
-      <div className='navbar-upper-dropdown-container'>
-        <Menu name={this.state.menuName} show={this.state.showMenu}
-          cancelHide={this.clearHideMenu} hide={this.delayHide}/>
-      </div>
+        <ul className='navbar-navigation-upper'>
+          <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Women&apos;s</li>
+          <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-selected'>Men&apos;s</li>
+          <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Home</li>
+          <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Lifestyle</li>
+          <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>Beauty</li>
+          <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-sale'>Sale</li>
+        </ul>
+        <div className='navbar-upper-dropdown-container'>
+          <Menu
+            name={this.state.menuName}
+            show={this.state.showMenu}
+            cancelHide={this.clearHideMenu}
+            hide={this.delayHide}
+          />
+        </div>
       </div>
     );
   }

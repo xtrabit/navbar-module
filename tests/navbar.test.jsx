@@ -1,9 +1,8 @@
-
+/* eslint-disable */
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Cart from '../client/cart';
 import NavSearch from '../client/navsearch';
-
 import App from '../client/app';
 import Popular from '../client/popular';
 import Promo from '../client/promo';

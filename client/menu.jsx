@@ -21,7 +21,7 @@ class Menu extends React.Component {
     ];
     this.beauty = [
       'New', 'Makeup', 'Skin Care', 'Perfume + Fragrance', 'Bath + Body', 'Hair', 'Nails',
-      'Wellness', 'Accessories', 'Men\'s Grooming', 'Gift Sets', 'Brands','Sale'
+      'Wellness', 'Accessories', 'Men\'s Grooming', 'Gift Sets', 'Brands', 'Sale'
     ];
     this.sale = [
       'Women\'s Sale', 'Men\'s Sale', 'Home Sale', 'Lifestyle Sale', 'Beauty Sale'
@@ -29,15 +29,14 @@ class Menu extends React.Component {
   }
 
   showList(category) {
-    if (this.props.show) {
-      let name =category.toLowerCase().split('\'').join('');
+    const {show} = this.props;
+    if (show) {
+      const name = category.toLowerCase().split('\'').join('');
       if (name) {
-        let list = this[name].map((item) => {
-          return (
-            item === 'Sale'
+        const list = this[name].map((item) => {
+          return item === 'Sale'
             ? <li key={item} className='navbar-sale'>{item}</li>
-            : <li key={item}>{item}</li>
-          );
+            : <li key={item}>{item}</li>;
         });
         return (
           <ul className='navbar-upper-dropdown-menu'>
@@ -46,18 +45,25 @@ class Menu extends React.Component {
         );
       }
     }
+    return null;
   }
 
   render() {
+    const {
+      cancelHide,
+      hide,
+      name
+    } = this.props;
     return (
-      <div className='navbar-upper-dropdown'
-        onMouseEnter={this.props.cancelHide}
-        onMouseLeave={this.props.hide}>
-        {this.showList(this.props.name)}
+      <div
+        className='navbar-upper-dropdown'
+        onMouseEnter={cancelHide}
+        onMouseLeave={hide}
+      >
+        {this.showList(name)}
       </div>
     );
   }
 }
 
 export default Menu;
-

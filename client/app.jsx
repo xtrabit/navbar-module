@@ -28,16 +28,6 @@ class App extends React.Component {
     window.addEventListener('beforeunload', this.emptyAnonymousCart);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('sould update current', this.state)
-  //   console.log('sould update next', nextState)
-  //   if (nextState.qty !== this.state.qty) {
-  //     // this.setState(nextState);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   componentWillUnmount() {
     document.removeEventListener('scroll', this.trackScrolling);
     window.removeEventListener('beforeunload', this.emptyAnonymousCart);
@@ -132,8 +122,8 @@ class App extends React.Component {
           />
         </div>
         <div className={`navbar-header-empty${this.lockPosition()}`} />
-        <img src="top.png" alt="" />
-        <img src="mid.png" alt="" />
+        <img src='top.png' alt='' />
+        <img src='mid.png' alt='' />
       </div>
     );
   }
