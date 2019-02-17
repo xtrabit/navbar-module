@@ -1,11 +1,6 @@
 import React from 'react';
 
 class Promo extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
     return (
       <div id='promo' className='navbar-header-promo'>

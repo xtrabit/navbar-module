@@ -5,16 +5,16 @@ class Popular extends React.Component {
     super(props);
     this.state = {
       items: null,
-      promoItems:null
+      promoItems: null
     };
     this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3001/get3randomitems`)
-    .then(res => res.json())
-    .then(res => this.setState({promoItems: res}))
-    .catch((err) => console.error(err));
+    fetch('http://localhost:3001/get3randomitems')
+      .then(res => res.json())
+      .then(res => this.setState({promoItems: res}))
+      .catch(err => console.error(err));
   }
 
   componentDidUpdate() {
@@ -24,22 +24,30 @@ class Popular extends React.Component {
   }
 
   addToCart(e) {
-    let index = e.currentTarget.className;
-    this.props.addItemToCart(this.state.items[index]);
+    const index = e.currentTarget.className;
+    if (this.state.items !== null) {
+      this.props.addItemToCart(this.state.items[index]);
+    } else {
+      this.props.addItemToCart(this.state.promoItems[index]);
+    }
   }
 
   renderPopularItem(items) {
-    if ((!items || !(items && items.length)) || !this.props.searchStr) {
-      items = this.state.promoItems;
+    if (!items) {
+      items = this.state.promoItems; // eslint-disable-line
     }
     if (items) {
       return items.map((item, index) => {
         return (
-          <div className={index} key={'a' + item.id}
-            onClick={this.addToCart}>
+          <div
+            className={index}
+            key={`a${item.id}`}
+            onClick={this.addToCart}
+            role='presentation'
+          >
             <div className='navbar-popular-item'>
               <div className='navbar-popular-item-image-container'>
-                <img className='navbar-popular-item-image'src={item.image_url}></img>
+                <img className='navbar-popular-item-image' src={item.image_url} alt='' />
               </div>
               <div className='navbar-popular-item-description'>
                 <h3 className='navbar-popular-item-header'>{item.item_name}</h3>
@@ -52,14 +60,23 @@ class Popular extends React.Component {
   }
 
   render() {
-      return (
-        <div className='navbar-search-popular'>
-          <h3 className='navbar-popular-header'>{this.props.searchStr ? (<p>PRODUCT RESULTS: <span className='navbar-popular-header-search-str'>{this.props.searchStr}</span></p>) : 'POPULAR PRODUCTS'}</h3>
-          <div className='navbar-popular-container'>
-            {this.renderPopularItem(this.state.items)}
-          </div>
+    return (
+      <div className='navbar-search-popular'>
+        <h3 className='navbar-popular-header'>
+          {this.props.searchStr
+            ? (
+              <p>
+                {'PRODUCT RESULTS: '}
+                <span className='navbar-popular-header-search-str'>{this.props.searchStr}</span>
+              </p>
+            )
+            : 'POPULAR PRODUCTS'}
+        </h3>
+        <div className='navbar-popular-container'>
+          {this.renderPopularItem(this.state.items)}
         </div>
-      );
+      </div>
+    );
   }
 }
 

@@ -3,22 +3,21 @@ import Trending from './trending';
 import Popular from './popular';
 
 class Suggestions extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (this.props.show) {
       return (
         <div className='navbar-search-suggestions'>
-          <Popular user={this.props.user}
+          <Popular
             addItemToCart={this.props.addItemToCart}
-            items={this.props.items}
             searchStr={this.props.searchStr}
-            />
-          <Trending searchStrFound={this.props.searchStrFound}
+            items={this.props.items}
+            user={this.props.user}
+          />
+          <Trending
+            searchStrFound={this.props.searchStrFound}
+            searchStr={this.props.searchStr}
             trending={this.props.trending}
-            searchStr={this.props.searchStr}/>
+          />
         </div>
       );
     }

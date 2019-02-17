@@ -19,14 +19,11 @@ class Dropdown extends React.Component {
   }
 
   showList(category) {
-    if (this.props.show) {
-      let name = category.toLowerCase().split(/\s\+\s|\s/).join('');
+    const {show} = this.props;
+    if (show) {
+      const name = category.toLowerCase().split(/\s\+\s|\s/).join('');
       if (name) {
-        let list = this[name].map((item) => {
-          return (
-            <li key={item}>{item}</li>
-          );
-        });
+        const list = this[name].map(item => <li key={item}>{item}</li>);
         return (
           <ul className='navbar-lower-dropdown-menu'>
             {list}
@@ -34,20 +31,25 @@ class Dropdown extends React.Component {
         );
       }
     }
+    return null;
   }
 
   render() {
+    const {
+      cancelHide,
+      hide,
+      name
+    } = this.props;
     return (
-      <div className='navbar-lower-dropdown'
-        onMouseEnter={this.props.cancelHide}
-        onMouseLeave={this.props.hide}>
-        {this.showList(this.props.name)}
+      <div
+        className='navbar-lower-dropdown'
+        onMouseEnter={cancelHide}
+        onMouseLeave={hide}
+      >
+        {this.showList(name)}
       </div>
     );
   }
 }
 
 export default Dropdown;
-
-
-

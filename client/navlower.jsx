@@ -21,7 +21,7 @@ class NavLower extends React.Component {
     event.preventDefault();
     if (this.state.nextMenuName === event.target.innerHTML && this.state.hideMenu !== true) {
       this.setState({showMenu: true});
-      this.setState({menuName: event.target.innerHTML})
+      this.setState({menuName: event.target.innerHTML});
     }
   }
 
@@ -50,16 +50,16 @@ class NavLower extends React.Component {
   }
 
   createMenuList() {
-    let list = ['New', 'Brands', 'Graphic Tees', 'Tops', 'Coats + Jackets', 'Bottoms',
+    const list = ['New', 'Brands', 'Graphic Tees', 'Tops', 'Coats + Jackets', 'Bottoms',
       'Suiting', 'Shoes', 'Accessories', 'Socks + Underwear', 'Vintage', 'Grooming', 'Sale'];
-    let menus = list.map((item) => {
+    const menus = list.map((item) => {
       return (
         <div key={item}>
           {item === 'Tops'
-          ? <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-selected'>{item}</li>
-          : item === 'Sale'
-          ? <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-sale'>{item}</li>
-          : <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>{item}</li>}
+            ? <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-selected'>{item}</li>
+            : item === 'Sale'
+              ? <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide} className='navbar-sale'>{item}</li>
+              : <li onMouseEnter={this.delayShow} onMouseLeave={this.delayHide}>{item}</li>}
           <div className='navbar-lower-dropdown-container'>
             {this.createDropdown(item)}
           </div>
@@ -70,12 +70,17 @@ class NavLower extends React.Component {
   }
 
   createDropdown(name) {
-    if (name === this.state.menuName){
+    if (name === this.state.menuName) {
       return (
-        <Dropdown name={this.state.menuName} show={this.state.showMenu}
-          cancelHide={this.clearHideMenu} hide={this.delayHide}/>
+        <Dropdown
+          name={this.state.menuName}
+          show={this.state.showMenu}
+          cancelHide={this.clearHideMenu}
+          hide={this.delayHide}
+        />
       );
     }
+    return null;
   }
 
   render() {
