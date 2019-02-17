@@ -4,6 +4,7 @@ body {
   padding: 0;
   margin: 0;
   width: 100%;
+  text-align: center;
 }
 .navbar-header-promo {
   height: 50px;
@@ -193,7 +194,7 @@ body {
 
 .navbar-lower-dropdown-container {
   position: relative;
-
+  text-align: left;
 }
 
 .navbar-lower-dropdown {
@@ -378,6 +379,7 @@ li:hover {
 
 .navbar-search-suggestions-container {
   position: relative;
+  text-align: left;
 }
 
 .navbar-search-suggestions {
@@ -676,6 +678,7 @@ li:hover {
   font: .68rem helvetica, arial, sans-serif;
   letter-spacing: .03rem;
   cursor: pointer;
+  text-align: left;
 }
 
 .navbar-cart-header {
@@ -755,7 +758,8 @@ li:hover {
   flex-direction: row;
   align-items: center;
   position: relative;
-  height: 100%
+  height: 100%;
+  text-align: left;
 }
 
 .navbar-navigation-account {

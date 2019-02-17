@@ -24,6 +24,5 @@ coverage
 build/
 dist/
 
-config.js
 top.png
 mid.png
