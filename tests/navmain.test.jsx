@@ -3,7 +3,7 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import NavMain from '../client/navmain';
 
-describe.only('NavMain section', () => {
+describe('NavMain section', () => {
 
   it('Main menu bar should exist', () => {
     const wrapper = mount(<NavMain />);
