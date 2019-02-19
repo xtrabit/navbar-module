@@ -71,7 +71,7 @@ class Cart extends React.Component {
     const {qty} = this.props;
     return (
       <div className='navbar-navigation-cart-container'>
-        <a href='#'>
+        <a>
           <span className='navbar-navigation-cart'>
             <svg height='18' width='18'>
               <title>Bag</title>

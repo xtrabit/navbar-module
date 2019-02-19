@@ -18,6 +18,7 @@
     "test:coverage": "jest --coverage --colors"
   },
   "dependencies": {
+    "@babel/runtime": "^7.3.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mysql": "^2.16.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
@@ -50,14 +52,13 @@
       "<rootDir>/client/enzyme.config.js"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
+      "client/**/*.{js,jsx,mjs}"
     ],
     "clearMocks": true,
     "verbose": true,
     "coverageDirectory": "coverage",
     "moduleFileExtensions": [
       "js",
-      "json",
       "jsx"
     ],
     "testEnvironment": "jsdom",
@@ -72,6 +73,12 @@
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
     ],
-    "collectCoverage": true
+    "collectCoverage": true,
+    "roots": [
+      "tests"
+    ],
+    "unmockedModulePathPatterns": [
+      "/node_modules/"
+    ]
   }
 }
