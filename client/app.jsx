@@ -122,8 +122,9 @@ class App extends React.Component {
           />
         </div>
         <div className={`navbar-header-empty${this.lockPosition()}`} />
-        <img src='top.png' alt='' />
-        <img src='mid.png' alt='' />
+        {//<img src='top.png' alt='' />
+        //<img src='mid.png' alt='' />
+        }
       </div>
     );
   }
