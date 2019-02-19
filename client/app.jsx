@@ -2,7 +2,7 @@ import React from 'react';
 import Promo from './promo';
 import Navigation from './navigation';
 
-class App extends React.Component {
+class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -130,4 +130,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Nav;
