@@ -49,7 +49,7 @@ class Navigation extends React.Component {
     return (
       <div className='navbar-header-navigation'>
         <div className='navbar-navigation-logo'>
-          <img className='navbar-navigation-logo-image' src='valentines_updated.gif' alt='' />
+          <img className='navbar-navigation-logo-image' src='http://localhost:3001/valentines_updated.gif' alt='' />
         </div>
         <div className='navbar-navigation-container'>
           <nav className='navbar-navigation-main'>

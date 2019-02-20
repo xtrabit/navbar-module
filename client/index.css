@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
 
-body {
+/*#nav {
   padding: 0;
   margin: 0;
   width: 100%;
   text-align: center;
-}
+}*/
 .navbar-header-promo {
   height: 50px;
   display: flex;
@@ -453,12 +453,14 @@ li:hover {
 
 .navbar-header {
   width: 100%;
+  z-index: 9999;
 }
 
 .navbar-header-fixed {
   width: 100%;
   position: fixed;
   top: -50px;
+  z-index: 9999;
 }
 
 /*
