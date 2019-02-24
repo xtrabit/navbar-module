@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mysql:
+    build: docker-mysql/.
+    container_name: picae/fec-initial:nb-mysq4
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+    ports:
+      - "3300:3306"
+    restart: on-failure
+  web:
+    build: .
+    container_name: picae/fec-initial:nb-app4
+    ports:
+      - "80:3001"
+    environment:
+      PORT: "3001"
+      DB_HOST: "localhost"
+      DB_USER: "root"
+      DB_DATABASE: "navbar"
+      DB_PORT: "3306"
+    links:
+      - "mysql:my-custom-link"
+    depends_on:
+      - mysql
+    expose:
+      - "3001"
+    restart: on-failure
+    command: ["npm", "start"]

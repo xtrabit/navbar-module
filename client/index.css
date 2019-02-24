@@ -6,6 +6,15 @@
   width: 100%;
   text-align: center;
 }*/
+#item-view .accordion-button {
+/*  text-align: left;
+  justify-content: center;
+  font-weight: bold;
+  height: calc(30px + 1vmax);
+  width: 95%;
+  cursor: pointer;*/
+  background-color: #fff;
+}
 .navbar-header-promo {
   height: 50px;
   display: flex;
