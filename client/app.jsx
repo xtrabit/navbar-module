@@ -26,6 +26,12 @@ class Nav extends React.Component {
   componentDidMount() {
     document.addEventListener('scroll', this.trackScrolling);
     window.addEventListener('beforeunload', this.emptyAnonymousCart);
+    let productID = new URLSearchParams(window.location.search).get('productID');
+    if (productID && !isNaN(Number(productID)) && Number(productID) < 101) {
+      let tempItem = {};
+      tempItem.id = productID;
+      this.addItemToCart(tempItem);
+    }
   }
 
   componentWillUnmount() {
@@ -34,7 +40,7 @@ class Nav extends React.Component {
   }
 
   emptyAnonymousCart() {
-    fetch('http://localhost:3001/emptycart/anonymous')
+    fetch(`${process.env.MY_URL}/emptycart/anonymous`)
       .catch(err => console.error(err));
   }
 
@@ -70,7 +76,7 @@ class Nav extends React.Component {
 
   addRandomItemToCart() {
     const {user} = this.state;
-    fetch(`http://localhost:3001/addrandomtocart/${user}`)
+    fetch(`${process.env.MY_URL}/addrandomtocart/${user}`)
       .then(res => res.json())
       .then(res => this.setState({lastItem: res.item, qty: res.qty}))
       .catch(err => console.error(err));
@@ -78,15 +84,15 @@ class Nav extends React.Component {
 
   addItemToCart(item) {
     const {user} = this.state;
-    fetch(`http://localhost:3001/addtocart/${user}/${item.id}`)
+    fetch(`${process.env.MY_URL}/addtocart/${user}/${item.id}`)
       .then(res => res.json())
-      .then(res => this.setState({lastItem: item, qty: res}))
+      .then(res => this.setState({lastItem: res.item, qty: res.qty}))
       .catch(err => console.error(err));
   }
 
   signIn(user) {
     this.setState({user}, () => {
-      fetch(`http://localhost:3001/signin/${user}`)
+      fetch(`${process.env.MY_URL}/signin/${user}`)
         .then(res => res.json())
         .then(res => this.setState({qty: res}))
         .catch(err => console.error(err));

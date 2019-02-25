@@ -11,7 +11,7 @@ class Popular extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/get3randomitems')
+    fetch(`${process.env.MY_URL}/get3randomitems`)
       .then(res => res.json())
       .then(res => this.setState({promoItems: res}))
       .catch(err => console.error(err));

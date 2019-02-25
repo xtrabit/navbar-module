@@ -104,7 +104,7 @@ class NavSearch extends React.Component {
   handleSearch(e) {
     this.setState({searchStr: e.target.value}, () => {
       if (this.state.searchStr) {
-        fetch(`http://localhost:3001/search/${this.state.searchStr}`)
+        fetch(`${process.env.MY_URL}/search/${this.state.searchStr}`)
           .then(res => res.json())
           .then(res => {
             if (res.found.length) {

@@ -1,17 +1,30 @@
 const mysql = require('mysql');
-const config = require('./config.js');
 
-const db = mysql.createConnection(config);
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT
+});
+let testConn = (err) => {
+  if (err) {
+    console.log('MYSQL ERROR { Error: Cannot enqueue Handshake after already enqueuing a Handshake.}');
+  } else {
+    console.log('mySQL CONNECTED!');
+  }
+};
 
 db.connect((err) => {
   if (err) {
-    console.log(err);
+    console.log('MYSQL ERROR',err);
   } else {
     console.log('mySQL CONNECTED!');
   }
 });
 
 const getItem = function(itemName, callback) {
+  db.connect(testConn);
   db.query(('SELECT * FROM inventory WHERE item_name = "' + itemName + '"'), function(err, res) {
     if (err) {
       console.log('ERROR inventory', err);
@@ -22,7 +35,20 @@ const getItem = function(itemName, callback) {
   });
 };
 
+const getItemById = function(itemId, callback) {
+  db.connect(testConn);
+  db.query(('SELECT * FROM inventory WHERE id = ' + itemId), function(err, res) {
+    if (err) {
+      console.log('ERROR inventory by ID', err);
+      return callback(err);
+    }
+    callback(null, res[0]);
+    // db.end();
+  });
+};
+
 const getRandomItem = function(callback) {
+  db.connect(testConn);
   db.query(('SELECT * FROM inventory'), function(err, res) {
     if (err) {
       console.log('ERROR inventory', err);
@@ -34,6 +60,7 @@ const getRandomItem = function(callback) {
 };
 
 const get3RandomItems = function(callback) {
+  db.connect(testConn);
   db.query(('SELECT * FROM inventory'), function(err, res) {
     if (err) {
       console.log('ERROR inventory', err);
@@ -49,6 +76,7 @@ const get3RandomItems = function(callback) {
 };
 
 const addItemToCart = function(user, item_id, callback) {
+  db.connect(testConn);
   // item_id = 60;
   db.query(('SELECT id FROM cart WHERE item_id = ' + item_id + ' AND user = "' + user + '"'), function(err, res) {
     if (err) {
@@ -83,6 +111,7 @@ const addItemToCart = function(user, item_id, callback) {
 };
 
 const transferCart = function(user, callback) {
+  db.connect(testConn);
   db.query(('UPDATE cart SET user = "' + user + '" WHERE user = "anonymous"'), function(err) {
     if (err) {
       console.log('ERROR transferCart', err);
@@ -92,16 +121,19 @@ const transferCart = function(user, callback) {
   });
 };
 
-const emptyCart = function(user) {
+const emptyCart = function(user, callback) {
+  db.connect(testConn);
   db.query(('DELETE FROM cart WHERE user = "' + user + '"'), function(err) {
     if (err) {
       console.log('ERROR cart', err);
       return callback(err);
     }
+    callback();
   });
 }
 
 const getUserQty = function(user, callback) {
+  db.connect(testConn);
   db.query(('SELECT * FROM cart WHERE user = "' + user + '"'), function(err, res) {
     if (err) {
       console.log('ERROR getUserQty', err);
@@ -115,6 +147,7 @@ const getUserQty = function(user, callback) {
 };
 
 const search = function(str, callback) {
+  db.connect(testConn);
   db.query(('SELECT * FROM inventory'), function(err, res) {
     if (err) {
       console.log('ERROR inventory', err);
@@ -213,6 +246,7 @@ module.exports = {
   emptyCart,
   transferCart,
   get3RandomItems,
-  search
+  search,
+  getItemById
 };
 
