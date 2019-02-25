@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app_host_db:
+    image: picae/fec-initial:ref-app2-server-mod
+    container_name: nb-app-server-mod
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: "3001"
+      DB_HOST: "localhost"
+      DB_USER: "root"
+      DB_PASSWORD:
+      DB_DATABASE: "navbar"
+      DB_PORT: "3306"
+    network_mode: "host"
+    expose:
+      - "3001"
+    restart: on-failure
+    command: ["npm", "start"]
